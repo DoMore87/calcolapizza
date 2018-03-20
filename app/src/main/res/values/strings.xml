@@ -1,18 +1,2 @@
-<resources>
-    <string name="app_name">Calcolapizza</string>
-    <string name="panielli">Numero panielli</string>
-    <string name="pesoPanielli">Peso panielli (gr)</string>
-    <string name="idro">Idratazione desiderata</string>
-    <string name="sale">Sale per litro d\'acqua</string>
-    <string name="oreLievitazione">Ore di lievitazione totali..</string>
-    <string name="frigo">..di cui in frigo</string>
-    <string name="temperatura">Temperatura ambiente (°C)</string>
-    <string name="grassi">Olio/strutto/burro (gr/l)</string>
-    <string name="pdr">Pasta di riporto (%)</string>
-    <string name="tipologiaPdr">Tipologia pasta di riporto</string>
-    <string-array name="pdr_array">
-        <item>Stanca</item>
-        <item>Normale</item>
-        <item>Vivace</item>
-    </string-array>
-</resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources></resources>
