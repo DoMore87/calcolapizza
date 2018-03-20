@@ -38,12 +38,14 @@
         android:orientation="horizontal">
         <EditText
             android:id="@+id/panielli"
+            android:nextFocusDown="@id/pesoPanielli"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:inputType="number" />
         <EditText
             android:id="@+id/pesoPanielli"
+            android:nextFocusDown="@id/idro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
@@ -80,12 +82,14 @@
         android:orientation="horizontal">
         <EditText
             android:id="@+id/idro"
+            android:nextFocusDown="@id/sale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:inputType="numberDecimal" />
         <EditText
             android:id="@+id/sale"
+            android:nextFocusDown="@id/oreLievitazione"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
@@ -122,12 +126,14 @@
         android:orientation="horizontal">
         <EditText
             android:id="@+id/oreLievitazione"
+            android:nextFocusDown="@id/frigo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:inputType="numberDecimal" />
         <EditText
             android:id="@+id/frigo"
+            android:nextFocusDown="@id/temperatura"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
@@ -164,12 +170,14 @@
         android:orientation="horizontal">
         <EditText
             android:id="@+id/temperatura"
+            android:nextFocusDown="@id/grassi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:inputType="numberDecimal" />
         <EditText
             android:id="@+id/grassi"
+            android:nextFocusDown="@id/pdr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
