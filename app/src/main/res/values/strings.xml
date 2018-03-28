@@ -11,6 +11,7 @@
     <string name="grassi">Olio/strutto/burro (gr/l)</string>
     <string name="pdr">Pasta di riporto (%)</string>
     <string name="tipologiaPdr">Tipologia pasta di riporto</string>
+    <string name="calcola">CALCOLA</string>
     <string-array name="pdr_array">
         <item>Stanca</item>
         <item>Normale</item>

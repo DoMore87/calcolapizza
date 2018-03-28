@@ -229,4 +229,12 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btn_calcola"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/calcola"
+        android:background="@color/colorPrimary"/>
+
 </LinearLayout>
