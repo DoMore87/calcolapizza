@@ -12,6 +12,13 @@
     <string name="pdr">Pasta di riporto (%)</string>
     <string name="tipologiaPdr">Tipologia pasta di riporto</string>
     <string name="calcola">CALCOLA</string>
+    <string name="acqua">Acqua</string>
+    <string name="farina">Farina</string>
+    <string name="sale_res">Sale</string>
+    <string name="olio_strutto_burro">Olio/Strutto/Burro</string>
+    <string name="pasta_di_riporto">Pasta di riporto</string>
+    <string name="lievito">Lievito di birra fresco</string>
+    <string name="screenshot">Screenshot</string>
     <string-array name="pdr_array">
         <item>Stanca</item>
         <item>Normale</item>
