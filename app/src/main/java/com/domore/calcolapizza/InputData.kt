@@ -1,5 +1,7 @@
 package com.domore.calcolapizza
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class InputData(val numPanielli : Int,
                 val pesoPanielli: Float,
                 val idro: Float,
