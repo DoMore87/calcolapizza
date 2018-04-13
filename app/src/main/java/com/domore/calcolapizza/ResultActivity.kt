@@ -9,8 +9,7 @@ class ResultActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
-        var inputData = JSON.parse<InputData>(intent.getStringExtra("INPUT_DATA"))
-
+        PizzaCalculator.Calculate(JSON.parse(intent.getStringExtra("INPUT_DATA")))
 
     }
 }

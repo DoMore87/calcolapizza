@@ -14,28 +14,40 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChan
     override fun onFocusChange(view: View?, hasFocus: Boolean) {
         if(!(view is EditText) || hasFocus)
             return
-        if(view.text.toString().isBlank() ) {
-            view.error = "Il campo non può essere vuoto"
+        validateEditText(view)
+    }
+
+    private fun validateEditText(editText: EditText){
+        if(editText.text.toString().isBlank() ) {
+            editText.error = "Il campo non può essere vuoto"
             return
         }
-        if(!InputValidatorFactory.GetFor(view.id)(view.text.toString()))
-            view.error = "Valore non valido"
+        val error = InputValidatorFactory.GetFor(editText.id)(editText.text.toString())
+        if(error != "")
+            editText.error = error
     }
 
     override fun onClick(view: View?) {
         val intent = Intent(this, ResultActivity::class.java)
-        val data = JSON.stringify(InputData(
-                panielli.text.toString().toInt(),
-                pesoPanielli.text.toString().toFloat(),
-                idro.text.toString().toFloat(),
-                sale.text.toString().toFloat(),
-                oreLievitazione.text.toString().toFloat(),
-                frigo.text.toString().toFloat(),
-                temperatura.text.toString().toFloat(),
-                grassi.text.toString().toFloat(),
-                pdr.text.toString().toFloat(),0))
-        intent.putExtra("INPUT_DATA", data)
-        startActivity(intent)
+
+        val editTexts = listOf(panielli, pesoPanielli, idro, sale, oreLievitazione, frigo, temperatura, grassi, pdr);
+        editTexts.map { it -> validateEditText(it) }
+        val valuesWithErrors = editTexts.filter { it.error != null && !it.error.isBlank() }
+
+        if(valuesWithErrors.isEmpty()) {
+            val data = JSON.stringify(InputData(
+                    panielli.text.toString().toInt(),
+                    pesoPanielli.text.toString().toFloat(),
+                    idro.text.toString().toFloat(),
+                    sale.text.toString().toFloat(),
+                    oreLievitazione.text.toString().toFloat(),
+                    frigo.text.toString().toFloat(),
+                    temperatura.text.toString().toFloat(),
+                    grassi.text.toString().toFloat(),
+                    pdr.text.toString().toFloat(), 0))
+            intent.putExtra("INPUT_DATA", data)
+            startActivity(intent)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
