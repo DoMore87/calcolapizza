@@ -19,6 +19,7 @@
     <string name="pasta_di_riporto">Pasta di riporto</string>
     <string name="lievito">Lievito di birra fresco</string>
     <string name="screenshot">Screenshot</string>
+    <string name="pizza_in_teglia">Pizza in teglia?</string>
     <string-array name="pdr_array">
         <item>Stanca</item>
         <item>Normale</item>
