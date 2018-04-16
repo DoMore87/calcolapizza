@@ -12,12 +12,12 @@ class ResultActivity : AppCompatActivity() {
         setContentView(R.layout.activity_result)
         val result = PizzaCalculator.Calculate(JSON.parse(intent.getStringExtra("INPUT_DATA")))
 
-        txt_acqua.text = result.acqua.toString()
-        txt_farina.text = result.farina.toString()
-        txt_lievito.text = result.lievito.toString()
-        txt_olio.text = result.grassi.toString()
-        txt_sale.text = result.sale.toString()
-        txt_prd.text = result.pdr.toString()
+        txt_acqua.text = "%.0f g".format(result.acqua)
+        txt_farina.text = "%.0f g".format(result.farina)
+        txt_lievito.text = "%.2f g".format(result.lievito)
+        txt_olio.text = "%.0f g".format(result.grassi)
+        txt_sale.text = "%.0f g".format(result.sale)
+        txt_prd.text = "%.2f g".format(result.pdr)
 
 
     }

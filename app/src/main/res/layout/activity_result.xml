@@ -9,6 +9,8 @@
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
+
+
         <LinearLayout
             android:layout_marginTop="16dp"
             android:layout_marginLeft="16dp"
@@ -21,10 +23,10 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:layout_weight="0.5"
-                android:text="@string/acqua"
-                android:labelFor="@id/txt_acqua"/>
+                android:text="@string/farina"
+                android:labelFor="@id/txt_farina"/>
             <TextView
-                android:id="@+id/txt_acqua"
+                android:id="@+id/txt_farina"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
@@ -44,10 +46,10 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:layout_weight="0.5"
-                android:text="@string/farina"
-                android:labelFor="@id/txt_farina"/>
+                android:text="@string/acqua"
+                android:labelFor="@id/txt_acqua"/>
             <TextView
-                android:id="@+id/txt_farina"
+                android:id="@+id/txt_acqua"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"

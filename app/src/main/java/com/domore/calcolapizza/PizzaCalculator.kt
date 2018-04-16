@@ -1,6 +1,7 @@
 package com.domore.calcolapizza
 
 import kotlin.math.ceil
+import kotlin.math.roundToInt
 
 object PizzaCalculator {
 
@@ -22,12 +23,12 @@ object PizzaCalculator {
 
         val h = 2250 * (1 + input.salePerLitro / 200) * (1 + input.grassi / 300) / ((4.2 * input.idro - 80 - .0305 * input.idro * input.idro) * Math.pow(gradiNormalizzati, 2.5) * Math.pow(oreNormalizzate, 1.2))
 
-        val pdrRes = ceil(pesoTot * input.prd / 100)
-        val farinaRes = ceil(100000 * (pesoTot - pdrRes) / coeff)
-        val acquaRes = ceil((1000 * input.idro * (pesoTot - pdrRes) / coeff))
-        val saleRes = ceil(input.salePerLitro * input.idro * (pesoTot - pdrRes) / coeff)
-        val grassiRes = ceil(input.grassi * input.idro * (pesoTot - pdrRes) / coeff)
-        val lievitoRes = ceil((farinaRes * h - coeffPdr * pdrRes).toFloat())
+        val pdrRes = (pesoTot * input.prd / 100)
+        val farinaRes = (100000 * (pesoTot - pdrRes) / coeff)
+        val acquaRes = ((1000 * input.idro * (pesoTot - pdrRes) / coeff))
+        val saleRes = (input.salePerLitro * input.idro * (pesoTot - pdrRes) / coeff)
+        val grassiRes = (input.grassi * input.idro * (pesoTot - pdrRes) / coeff)
+        val lievitoRes = ((farinaRes * h - coeffPdr * pdrRes).toFloat())
 
         return ResultData(acquaRes,farinaRes,saleRes,grassiRes,pdrRes,lievitoRes)
     }
