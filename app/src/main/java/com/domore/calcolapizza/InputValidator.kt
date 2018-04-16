@@ -2,7 +2,7 @@ package com.domore.calcolapizza
 
 
 object InputValidatorFactory {
-    fun GetFor(id : Int) : (String) -> (String) = {
+    fun GetFor(id: Int, textValues: Map<Int, String>) : (String) -> (String) = {
         when(id){
             R.id.panielli -> {
                 val intValue = it.toIntOrNull();
@@ -41,10 +41,12 @@ object InputValidatorFactory {
             }
             R.id.frigo -> {
                 val floatValue = it.toFloatOrNull();
-                if(floatValue != null && floatValue >= 0)
+                val maxInFrigo = textValues.getOrElse(R.id.oreLievitazione, {"0"}).toFloat() - 1
+
+                if(floatValue != null && floatValue >= 0 && floatValue <= maxInFrigo)
                     ""
                 else
-                    "Inserisci un valore >= 0"
+                    "Inserisci un valore tra 0 e $maxInFrigo"
             }
             R.id.temperatura -> {
                 val floatValue = it.toFloatOrNull();
@@ -62,10 +64,19 @@ object InputValidatorFactory {
             }
             R.id.pdr -> {
                 val floatValue = it.toFloatOrNull();
-                if(floatValue != null && floatValue >= 0)
+                val maxValue = PizzaCalculator.CalculatePrdLimit(
+                        textValues.getOrElse(R.id.sale, {"0"}).toFloat(),
+                        textValues.getOrElse(R.id.grassi, {"0"}).toFloat(),
+                        textValues.getOrElse(R.id.idro, {"0"}).toFloat(),
+                        textValues.getOrElse(R.id.oreLievitazione, {"0"}).toFloat(),
+                        textValues.getOrElse(R.id.frigo, {"0"}).toFloat(),
+                        textValues.getOrElse(R.id.temperatura, {"0"}).toFloat(),
+                        textValues.getOrElse(R.id.pdr_types, {"0"}).toInt(),
+                        textValues.getOrElse(R.id.switchTeglia, {"false"}).toBoolean())
+                if(floatValue != null && floatValue >= 0 && floatValue <= maxValue)
                     ""
                 else
-                    "Inserisci un valore >= 0"
+                    "Inserisci un valore tra 0 e $maxValue"
             }
             else -> { ""  }
         }

@@ -1,28 +1,20 @@
 package com.domore.calcolapizza
 
-import kotlin.math.ceil
-import kotlin.math.roundToInt
-
 object PizzaCalculator {
 
     fun Calculate(input: InputData) : ResultData {
-        val inTeglia = 0;
-        val gradiNormalizzati = input.tempAmbiente * (1 - 0.25 * inTeglia)
 
-        val coeffPdr = when(input.tipoPdr){
-            1 -> 0.00333
-            2 -> 0.005
-            3 -> 0.01
-            else -> 0.0
-        }
-
-        val oreNormalizzate = (input.oreLievitazione - 9 * input.inFrigo / 10).toDouble()
+        val coeff = CalculateCoeff(input.salePerLitro, input.grassi, input.idro)
+        val coeffPdr = CalculatePdrCoeff(input.tipoPdr)
+        val h = CalculateH(input.salePerLitro,
+                input.grassi,
+                input.idro,
+                input.oreLievitazione,
+                input.inFrigo,
+                input.tempAmbiente,
+                input.inTeglia)
 
         val pesoTot = input.pesoPanielli * input.numPanielli
-        val coeff = input.idro * (input.salePerLitro + input.grassi) + 1000 * (input.idro + 100)
-
-        val h = 2250 * (1 + input.salePerLitro / 200) * (1 + input.grassi / 300) / ((4.2 * input.idro - 80 - .0305 * input.idro * input.idro) * Math.pow(gradiNormalizzati, 2.5) * Math.pow(oreNormalizzate, 1.2))
-
         val pdrRes = (pesoTot * input.prd / 100)
         val farinaRes = (100000 * (pesoTot - pdrRes) / coeff)
         val acquaRes = ((1000 * input.idro * (pesoTot - pdrRes) / coeff))
@@ -32,6 +24,53 @@ object PizzaCalculator {
 
         return ResultData(acquaRes,farinaRes,saleRes,grassiRes,pdrRes,lievitoRes)
     }
+
+    fun CalculatePrdLimit(salePerLitro: Float,
+                          grassi: Float,
+                          idro: Float,
+                          oreLievitazione: Float,
+                          oreInFrigo: Float,
+                          tempAmbiente: Float,
+                          tipoPdr: Int,
+                          teglia: Boolean) : Double {
+        val h = CalculateH(salePerLitro,grassi,idro, oreLievitazione, oreInFrigo, tempAmbiente, teglia)
+        val coeffPdr = CalculatePdrCoeff(tipoPdr)
+        val coeff = CalculateCoeff(salePerLitro, grassi, idro)
+        val pdrLimit = (1e5 * h * 100 / (1e5 * h + coeff * coeffPdr))
+        return pdrLimit
+    }
+
+    private fun CalculatePdrCoeff(tipoPdr: Int): Double{
+        return when(tipoPdr){
+            0 -> 0.00333
+            1 -> 0.005
+            2 -> 0.01
+            else -> 0.0
+        }
+    }
+
+    private fun CalculateCoeff(salePerLitro: Float,
+                       grassi: Float,
+                       idro: Float) : Float {
+        return idro * (salePerLitro + grassi) + 1000 * (idro + 100)
+    }
+
+    private fun CalculateH (salePerLitro: Float,
+                   grassi: Float,
+                   idro: Float,
+                   oreLievitazione: Float,
+                   oreInFrigo: Float,
+                   tempAmbiente: Float,
+                   teglia: Boolean) : Double {
+
+        val inTeglia = if (teglia) 1 else 0;
+        val gradiNormalizzati = tempAmbiente * (1 - 0.25 * inTeglia)
+        val oreNormalizzate = (oreLievitazione - 9 * oreInFrigo / 10).toDouble()
+        val h = 2250 * (1 + salePerLitro / 200) * (1 + grassi / 300) / ((4.2 * idro - 80 - .0305 * idro * idro) * Math.pow(gradiNormalizzati, 2.5) * Math.pow(oreNormalizzate, 1.2))
+        return h
+    }
+
+
 
 
     /*var a = 0;

@@ -18,13 +18,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChan
     }
 
     private fun validateEditText(editText: EditText){
+        val editTexts = listOf(panielli, pesoPanielli, idro, sale, oreLievitazione, frigo, temperatura, grassi, pdr);
+        val textValues = editTexts.associateBy ( {it.id}, {it.text.toString()} )
+        val nw = textValues.plus(Pair(switchTeglia.id, switchTeglia.isChecked.toString()))
+                .plus(Pair(pdr_types.id, pdr_types.selectedItemPosition.toString()))
+
         if(editText.text.toString().isBlank() ) {
             editText.error = "Il campo non può essere vuoto"
             return
         }
-        val error = InputValidatorFactory.GetFor(editText.id)(editText.text.toString())
+        val error = InputValidatorFactory.GetFor(editText.id, nw)(editText.text.toString())
         if(error != "")
             editText.error = error
+        val errorPdf = InputValidatorFactory.GetFor(pdr.id, nw)(editText.text.toString())
+        if(errorPdf != "")
+            pdr.error = errorPdf
     }
 
     override fun onClick(view: View?) {
@@ -44,7 +52,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChan
                     frigo.text.toString().toFloat(),
                     temperatura.text.toString().toFloat(),
                     grassi.text.toString().toFloat(),
-                    pdr.text.toString().toFloat(), 0))
+                    pdr.text.toString().toFloat(), pdr_types.selectedItemPosition, switchTeglia.isChecked))
             intent.putExtra("INPUT_DATA", data)
             startActivity(intent)
         }
@@ -57,15 +65,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChan
         btn_calcola.setOnClickListener(this)
 
         panielli.onFocusChangeListener = this
+        panielli.setText("1")
         pesoPanielli.onFocusChangeListener = this
+        pesoPanielli.setText("240")
         idro.onFocusChangeListener = this
+        idro.setText("65")
         sale.onFocusChangeListener = this
+        sale.setText("50")
         oreLievitazione.onFocusChangeListener = this
+        oreLievitazione.setText("24")
         frigo.onFocusChangeListener = this
+        frigo.setText("0")
         temperatura.onFocusChangeListener = this
+        temperatura.setText("20")
         grassi.onFocusChangeListener = this
+        grassi.setText("0")
         pdr.onFocusChangeListener = this
-
 
         val adapter = ArrayAdapter.createFromResource(this, R.array.pdr_array, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
