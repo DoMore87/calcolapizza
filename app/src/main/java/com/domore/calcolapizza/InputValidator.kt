@@ -76,7 +76,7 @@ object InputValidatorFactory {
                 if(floatValue != null && floatValue >= 0 && floatValue <= maxValue)
                     ""
                 else
-                    "Inserisci un valore tra 0 e $maxValue"
+                    "Inserisci un valore tra 0 e %.2f".format(maxValue)
             }
             else -> { ""  }
         }

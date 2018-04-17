@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import kotlinx.android.synthetic.main.activity_main.*
@@ -11,16 +12,18 @@ import kotlinx.serialization.json.JSON
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChangeListener {
 
+    private var textBoxes : List<EditText> = emptyList()
+
     override fun onFocusChange(view: View?, hasFocus: Boolean) {
         if(!(view is EditText) || hasFocus)
             return
-        validateEditText(view)
+        validateValues()
     }
 
     private fun validateEditText(editText: EditText){
-        val editTexts = listOf(panielli, pesoPanielli, idro, sale, oreLievitazione, frigo, temperatura, grassi, pdr);
-        val textValues = editTexts.associateBy ( {it.id}, {it.text.toString()} )
-        val nw = textValues.plus(Pair(switchTeglia.id, switchTeglia.isChecked.toString()))
+        val textValues = textBoxes.associateBy ( {it.id}, {it.text.toString()} )
+        val nw = textValues
+                .plus(Pair(switchTeglia.id, switchTeglia.isChecked.toString()))
                 .plus(Pair(pdr_types.id, pdr_types.selectedItemPosition.toString()))
 
         if(editText.text.toString().isBlank() ) {
@@ -30,17 +33,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChan
         val error = InputValidatorFactory.GetFor(editText.id, nw)(editText.text.toString())
         if(error != "")
             editText.error = error
-        val errorPdf = InputValidatorFactory.GetFor(pdr.id, nw)(editText.text.toString())
-        if(errorPdf != "")
-            pdr.error = errorPdf
+    }
+
+    private fun validateValues(){
+        textBoxes.forEach { validateEditText(it) }
     }
 
     override fun onClick(view: View?) {
         val intent = Intent(this, ResultActivity::class.java)
-
-        val editTexts = listOf(panielli, pesoPanielli, idro, sale, oreLievitazione, frigo, temperatura, grassi, pdr);
-        editTexts.map { it -> validateEditText(it) }
-        val valuesWithErrors = editTexts.filter { it.error != null && !it.error.isBlank() }
+        validateValues()
+        val valuesWithErrors = textBoxes.filter { it.error != null && !it.error.isBlank() }
 
         if(valuesWithErrors.isEmpty()) {
             val data = JSON.stringify(InputData(
@@ -52,7 +54,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChan
                     frigo.text.toString().toFloat(),
                     temperatura.text.toString().toFloat(),
                     grassi.text.toString().toFloat(),
-                    pdr.text.toString().toFloat(), pdr_types.selectedItemPosition, switchTeglia.isChecked))
+                    pdr.text.toString().toFloat(),
+                    pdr_types.selectedItemPosition,
+                    switchTeglia.isChecked))
             intent.putExtra("INPUT_DATA", data)
             startActivity(intent)
         }
@@ -81,10 +85,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChan
         grassi.onFocusChangeListener = this
         grassi.setText("0")
         pdr.onFocusChangeListener = this
+        pdr.setText("0")
+        switchTeglia.setOnCheckedChangeListener { compoundButton, b -> validateValues() }
+        pdr_types.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                validateValues()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+
+        }
+
+
 
         val adapter = ArrayAdapter.createFromResource(this, R.array.pdr_array, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         pdr_types.adapter = adapter
+
+        textBoxes = listOf(panielli, pesoPanielli, idro, sale, oreLievitazione, frigo, temperatura, grassi, pdr)
     }
 
 
