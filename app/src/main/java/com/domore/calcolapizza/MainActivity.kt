@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChan
         panielli.onFocusChangeListener = this
         panielli.setText("1")
         pesoPanielli.onFocusChangeListener = this
-        pesoPanielli.setText("240")
+        pesoPanielli.setText("200")
         idro.onFocusChangeListener = this
         idro.setText("65")
         sale.onFocusChangeListener = this
@@ -86,19 +86,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChan
         grassi.setText("0")
         pdr.onFocusChangeListener = this
         pdr.setText("0")
-        switchTeglia.setOnCheckedChangeListener { compoundButton, b -> validateValues() }
+        switchTeglia.setOnCheckedChangeListener { _, _ -> validateValues() }
         pdr_types.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 validateValues()
             }
-
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
-
         }
-
-
-
         val adapter = ArrayAdapter.createFromResource(this, R.array.pdr_array, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         pdr_types.adapter = adapter
