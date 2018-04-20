@@ -18,10 +18,11 @@
     <string name="olio_strutto_burro">Olio/Strutto/Burro</string>
     <string name="pasta_di_riporto">Pasta di riporto</string>
     <string name="lievito">Lievito di birra fresco</string>
-    <string name="screenshot">Screenshot</string>
+    <string name="screenshot">Salva Screenshot</string>
     <string name="pizza_in_teglia">Pizza in teglia?</string>
     <string name="calcolapizza">Calcola pizza</string>
     <string name="calcolamix">Calcola mix</string>
+    <string name="condividi">Salva e condividi</string>
     <string-array name="pdr_array">
         <item>Stanca</item>
         <item>Normale</item>

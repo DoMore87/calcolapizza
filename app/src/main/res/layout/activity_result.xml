@@ -6,13 +6,11 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
@@ -29,7 +27,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-
+        <LinearLayout
+            android:id="@+id/result_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
         <LinearLayout
             android:layout_marginTop="16dp"
             android:layout_marginLeft="16dp"
@@ -150,6 +152,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:orientation="horizontal">
@@ -169,7 +172,7 @@
                 android:text="0"/>
         </LinearLayout>
 
-
+        </LinearLayout>
         <Button
             android:id="@+id/btn_screen"
             android:layout_width="match_parent"
@@ -177,6 +180,15 @@
             android:layout_margin="16dp"
             android:background="@color/colorPrimary"
             android:text="@string/screenshot"/>
+
+        <Button
+            android:id="@+id/btn_share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/colorPrimary"
+            android:text="@string/condividi"/>
 
     </LinearLayout>
     </ScrollView>
