@@ -258,6 +258,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/pizza_in_teglia" />
+
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="ca-app-pub-2163515785111018/7643948972">
+        </com.google.android.gms.ads.AdView>
+
         <Button
             android:id="@+id/btn_calcola"
             android:layout_width="match_parent"

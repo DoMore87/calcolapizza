@@ -187,8 +187,20 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
             android:background="@color/colorPrimary"
             android:text="@string/condividi"/>
+
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="ca-app-pub-2163515785111018/7643948972">
+        </com.google.android.gms.ads.AdView>
+
+
 
     </LinearLayout>
     </ScrollView>

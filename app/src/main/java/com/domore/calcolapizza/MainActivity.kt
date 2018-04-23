@@ -7,6 +7,8 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.serialization.json.JSON
 
@@ -18,6 +20,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChan
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        MobileAds.initialize(this, "ca-app-pub-2163515785111018~6780748850")
+        adView.loadAd(AdRequest.Builder().build())
 
         if(isDebug)
             initializeEditTexts()

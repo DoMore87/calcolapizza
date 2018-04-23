@@ -11,6 +11,8 @@ import kotlinx.android.synthetic.main.activity_result.*
 import kotlinx.serialization.json.JSON
 import android.content.Intent
 import android.net.Uri
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import java.io.File
 import java.util.*
 
@@ -47,6 +49,9 @@ class ResultActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
+        MobileAds.initialize(this, "ca-app-pub-2163515785111018~6780748850")
+        adView.loadAd(AdRequest.Builder().build())
+
         checkPermission()
         btn_screen.setOnClickListener(this)
         btn_share.setOnClickListener(this)
